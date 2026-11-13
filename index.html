@@ -1,134 +1,579 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gaming Top-Up Hub Nepal</title>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --card: #1e293b;
-      --accent: #f97316;
-      --text: #f8fafc;
-      --sub: #94a3b8;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
-    body { background: var(--bg); color: var(--text); padding-bottom: 40px; }
-    header { background: #020617; padding: 18px 20px; text-align: center; border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 10; }
-    header h1 { font-size: 1.4rem; color: var(--accent); letter-spacing: 1px; }
-    .container { max-width: 500px; margin: 20px auto; padding: 0 15px; }
-    .step-box { background: var(--card); border-radius: 12px; padding: 16px; margin-bottom: 18px; border: 1px solid #334155; }
-    .step-title { font-size: 1rem; font-weight: 600; margin-bottom: 12px; color: #38bdf8; }
-    input, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: #fff; font-size: 0.95rem; margin-bottom: 10px; }
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .pack { background: #0f172a; border: 2px solid #334155; border-radius: 10px; padding: 12px; text-align: center; cursor: pointer; transition: 0.2s; }
-    .pack.active { border-color: var(--accent); background: rgba(249, 115, 22, 0.15); }
-    .pack h3 { font-size: 0.95rem; margin-bottom: 4px; }
-    .pack p { font-size: 0.85rem; color: var(--accent); font-weight: bold; }
-    .btn { width: 100%; padding: 14px; background: var(--accent); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
-    .btn:active { transform: scale(0.98); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEPAL TOP-UP STORE</title>
+
+<style>
+:root {
+  --bg:#080b12;
+  --card:#151c29;
+  --orange:#ff7900;
+  --text:#ffffff;
+  --muted:#aab3c2;
+}
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+body {
+  background:var(--bg);
+  color:var(--text);
+  padding-bottom:40px;
+}
+header {
+  background:#05070c;
+  border-bottom:2px solid var(--orange);
+  padding:20px 15px;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+header h1 {
+  color:var(--orange);
+  font-size:23px;
+}
+header p {
+  color:var(--muted);
+  font-size:12px;
+  margin-top:7px;
+}
+nav {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:9px;
+  padding:15px 8px;
+  background:#101722;
+}
+nav a {
+  color:white;
+  text-decoration:none;
+  font-size:12px;
+  padding:9px 13px;
+  border:1px solid #344052;
+  border-radius:20px;
+}
+nav a:hover {
+  background:var(--orange);
+}
+.container {
+  max-width:1000px;
+  margin:auto;
+  padding:18px 14px;
+}
+.hero {
+  background:linear-gradient(120deg,#2b1608,#111827,#261306);
+  border:1px solid #713a12;
+  border-radius:16px;
+  padding:35px 18px;
+  text-align:center;
+  margin-bottom:28px;
+}
+.hero h2 {
+  color:var(--orange);
+  font-size:28px;
+  margin-bottom:12px;
+}
+.hero p {
+  color:#ddd;
+  line-height:1.7;
+}
+.btn {
+  display:inline-block;
+  background:var(--orange);
+  color:white;
+  border:0;
+  border-radius:9px;
+  padding:13px 22px;
+  font-weight:bold;
+  text-decoration:none;
+  cursor:pointer;
+  margin-top:18px;
+}
+.section {
+  margin:30px 0;
+}
+.section-head {
+  border-left:4px solid var(--orange);
+  padding-left:12px;
+  margin-bottom:18px;
+}
+.section-head h2 {
+  font-size:21px;
+}
+.section-head span {
+  color:var(--orange);
+}
+.section-head p {
+  color:var(--muted);
+  font-size:12px;
+  margin-top:6px;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.product {
+  background:var(--card);
+  border:1px solid #303b4c;
+  padding:15px 10px;
+  border-radius:12px;
+  text-align:center;
+  transition:.2s;
+}
+.product:hover {
+  border-color:var(--orange);
+  transform:translateY(-3px);
+}
+.product .emoji {
+  font-size:32px;
+  margin-bottom:10px;
+}
+.product h3 {
+  font-size:14px;
+  margin-bottom:7px;
+}
+.price {
+  color:var(--orange);
+  font-weight:bold;
+  font-size:15px;
+}
+.product button {
+  background:var(--orange);
+  color:white;
+  border:0;
+  padding:9px 15px;
+  border-radius:7px;
+  margin-top:12px;
+  font-weight:bold;
+  cursor:pointer;
+  width:100%;
+}
+input,select {
+  width:100%;
+  background:#0c1420;
+  color:white;
+  padding:13px;
+  border:1px solid #39485b;
+  border-radius:8px;
+  margin:8px 0;
+  font-size:14px;
+}
+.order-box,.payment {
+  background:var(--card);
+  border:1px solid #303b4c;
+  border-radius:13px;
+  padding:18px;
+  margin-bottom:14px;
+}
+.order-box h3 {
+  color:var(--orange);
+  margin-bottom:10px;
+}
+.payments {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+}
+.payment {
+  text-align:center;
+}
+.payment img {
+  width:100%;
+  max-width:230px;
+  aspect-ratio:1;
+  object-fit:contain;
+  background:white;
+  border-radius:9px;
+  padding:8px;
+  margin:15px auto;
+  display:block;
+}
+.payment h3 {
+  font-size:21px;
+}
+.payment p {
+  color:var(--muted);
+  font-size:12px;
+}
+.note {
+  text-align:center;
+  color:var(--muted);
+  margin:20px 0;
+  line-height:1.7;
+  font-size:13px;
+}
+.whatsapp {
+  display:block;
+  background:#20c76a;
+  color:white;
+  padding:15px;
+  text-align:center;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
+  margin-top:15px;
+}
+footer {
+  background:#05070c;
+  border-top:1px solid #303b4c;
+  padding:25px 15px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  line-height:2;
+}
+@media(min-width:600px) {
+  .grid {grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+@media(min-width:850px) {
+  .grid {grid-template-columns:repeat(4,minmax(0,1fr));}
+}
+</style>
 </head>
+
 <body>
 
-  <header>
-    <h1>⚡ NEPAL TOP-UP STORE</h1>
-  </header>
+<header>
+  <h1>⚡ NEPAL TOP-UP STORE</h1>
+  <p>GAMING • GIFT CARDS • SUBSCRIPTIONS</p>
+</header>
 
-  <div class="container">
-    <!-- Step 1: Game Selection -->
-    <div class="step-box">
-      <div class="step-title">1. Select Game / Service</div>
-      <select id="gameSelect" onchange="updatePacks()">
-        <option value="Free Fire">Garena Free Fire (UID Top-Up)</option>
-        <option value="Roblox">Roblox (Robux Gift Card)</option>
-        <option value="PUBG">PUBG Mobile (UC)</option>
-      </select>
-      <input type="text" id="playerId" placeholder="Enter Player UID / Username" required>
-    </div>
+<nav>
+  <a href="#home">Home</a>
+  <a href="#gaming">Gaming</a>
+  <a href="#gifts">Gift Cards</a>
+  <a href="#subscriptions">Subscriptions</a>
+  <a href="#payments">Payments</a>
+</nav>
 
-    <!-- Step 2: Select Package -->
-    <div class="step-box">
-      <div class="step-title">2. Select Package</div>
-      <div class="grid" id="packGrid"></div>
-    </div>
+<main class="container">
 
-    <!-- Step 3: Payment & Order -->
-    <div class="step-box">
-      <div class="step-title">3. Payment Method</div>
-      <select id="paymentMethod">
-        <option value="eSewa">eSewa Wallet</option>
-        <option value="Khalti">Khalti Wallet</option>
-        <option value="IME Pay">IME Pay</option>
-      </select>
-      <button class="btn" onclick="sendOrder()">Buy Now via WhatsApp</button>
-    </div>
+<section class="hero" id="home">
+  <h2>🔥 WELCOME GAMERS 🔥</h2>
+  <p>Fast • Trusted • Easy Ordering</p>
+  <p>All Your Digital Products in One Place.</p>
+  <a href="#gaming" class="btn">EXPLORE PRODUCTS</a>
+</section>
+
+<!-- GAMING -->
+<section class="section" id="gaming">
+  <div class="section-head">
+    <h2>🎮 <span>Free Fire Diamonds</span></h2>
+    <p>Enter your Player UID when ordering.</p>
   </div>
 
-  <script>
-    const packages = {
-      "Free Fire": [
-        { name: "115 Diamonds", price: "Rs. 110" },
-        { name: "240 Diamonds", price: "Rs. 215" },
-        { name: "610 Diamonds", price: "Rs. 530" },
-        { name: "1240 Diamonds", price: "Rs. 1050" },
-        { name: "Weekly Membership", price: "Rs. 210" },
-        { name: "Monthly Membership", price: "Rs. 1020" }
-      ],
-      "Roblox": [
-        { name: "400 Robux", price: "Rs. 750" },
-        { name: "800 Robux", price: "Rs. 1450" },
-        { name: "1700 Robux", price: "Rs. 2900" },
-        { name: "4500 Robux", price: "Rs. 7200" }
-      ],
-      "PUBG": [
-        { name: "60 UC", price: "Rs. 145" },
-        { name: "325 UC", price: "Rs. 710" },
-        { name: "660 UC", price: "Rs. 1400" },
-        { name: "1800 UC", price: "Rs. 3500" }
-      ]
-    };
+  <div class="grid" id="freeFireProducts"></div>
+</section>
 
-    let selectedPack = null;
+<!-- OTHER GAMING -->
+<section class="section">
+  <div class="section-head">
+    <h2>🎮 <span>Other Gaming</span></h2>
+  </div>
+  <div class="grid">
+    <div class="product">
+      <div class="emoji">🔫</div>
+      <h3>PUBG Mobile UC</h3>
+      <p class="price">Contact for Price</p>
+      <button onclick="contactProduct('PUBG Mobile UC')">Order Now</button>
+    </div>
+    <div class="product">
+      <div class="emoji">🎮</div>
+      <h3>Roblox Robux</h3>
+      <p class="price">Contact for Price</p>
+      <button onclick="contactProduct('Roblox Robux')">Order Now</button>
+    </div>
+  </div>
+</section>
 
-    function updatePacks() {
-      const game = document.getElementById("gameSelect").value;
-      const grid = document.getElementById("packGrid");
-      grid.innerHTML = "";
-      selectedPack = packages[game][0];
+<!-- GIFT CARDS -->
+<section class="section" id="gifts">
+  <div class="section-head">
+    <h2>🎁 <span>Gift Cards</span></h2>
+    <p>Digital Gift Card Orders</p>
+  </div>
 
-      packages[game].forEach((pack, index) => {
-        const div = document.createElement("div");
-        div.className = "pack" + (index === 0 ? " active" : "");
-        div.innerHTML = `<h3>${pack.name}</h3><p>${pack.price}</p>`;
-        div.onclick = () => {
-          document.querySelectorAll(".pack").forEach(el => el.classList.remove("active"));
-          div.classList.add("active");
-          selectedPack = pack;
-        };
-        grid.appendChild(div);
-      });
-    }
+  <div class="grid">
+    <div class="product">
+      <div class="emoji">🎮</div>
+      <h3>Google Play Gift Card</h3>
+      <p class="price">Contact for Price</p>
+      <button onclick="contactProduct('Google Play Gift Card')">Order Now</button>
+    </div>
+    <div class="product">
+      <div class="emoji">🟩</div>
+      <h3>Xbox Gift Card</h3>
+      <p class="price">Contact for Price</p>
+      <button onclick="contactProduct('Xbox Gift Card')">Order Now</button>
+    </div>
+    <div class="product">
+      <div class="emoji">🎮</div>
+      <h3>PlayStation Gift Card</h3>
+      <p class="price">Contact for Price</p>
+      <button onclick="contactProduct('PlayStation Gift Card')">Order Now</button>
+    </div>
+    <div class="product">
+      <div class="emoji">🚀</div>
+      <h3>Steam Gift Card</h3>
+      <p class="price">Contact for Price</p>
+      <button onclick="contactProduct('Steam Gift Card')">Order Now</button>
+    </div>
+  </div>
+</section>
 
-    function sendOrder() {
-      const game = document.getElementById("gameSelect").value;
-      const uid = document.getElementById("playerId").value.trim();
-      const payment = document.getElementById("paymentMethod").value;
+<!-- SUBSCRIPTIONS -->
+<section class="section" id="subscriptions">
+  <div class="section-head">
+    <h2>👑 <span>Subscriptions</span></h2>
+  </div>
 
-      if (!uid) {
-        alert("Please enter your Player UID or Username!");
-        return;
-      }
+  <div class="grid">
+    <div class="product">
+      <div class="emoji">▶️</div>
+      <h3>YouTube Premium</h3>
+      <p class="price">Contact for Price</p>
+      <button onclick="contactProduct('YouTube Premium')">Order Now</button>
+    </div>
+    <div class="product">
+      <div class="emoji">🎬</div>
+      <h3>Netflix</h3>
+      <p class="price">Contact for Price</p>
+      <button onclick="contactProduct('Netflix Subscription')">Order Now</button>
+    </div>
+    <div class="product">
+      <div class="emoji">🎵</div>
+      <h3>Spotify Premium</h3>
+      <p class="price">Contact for Price</p>
+      <button onclick="contactProduct('Spotify Premium')">Order Now</button>
+    </div>
+    <div class="product">
+      <div class="emoji">✂️</div>
+      <h3>CapCut Pro</h3>
+      <p class="price">Contact for Price</p>
+      <button onclick="contactProduct('CapCut Pro')">Order Now</button>
+    </div>
+  </div>
+</section>
 
-      // Tapai ko WhatsApp number yaha rakhnuhos (977 pachhi ko 10 digit)
-      const phone = "9779800000000"; 
-      const message = `*New Top-Up Order*%0A------------------%0A*Game:* ${game}%0A*Player ID:* ${uid}%0A*Package:* ${selectedPack.name} (${selectedPack.price})%0A*Payment:* ${payment}`;
-      window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
-    }
+<!-- ORDER FORM -->
+<section class="section" id="order">
+  <div class="section-head">
+    <h2>🛒 <span>Place Your Order</span></h2>
+    <p>Fill in your details to order.</p>
+  </div>
 
-    // Load initial packs
-    updatePacks();
-  </script>
+  <div class="order-box">
+    <h3>Customer Details</h3>
 
+    <input id="customerName"
+      type="text" placeholder="Your Name">
+
+    <input id="playerUID"
+      type="text" placeholder="Player UID / Username (if required)">
+
+    <select id="selectedGame">
+      <option value="Free Fire">Free Fire</option>
+      <option value="PUBG Mobile">PUBG Mobile</option>
+      <option value="Roblox">Roblox</option>
+      <option value="Gift Card">Gift Card</option>
+      <option value="Subscription">Subscription</option>
+    </select>
+
+    <select id="selectedPackage">
+      <option value="">Select Package</option>
+    </select>
+
+    <select id="paymentMethod">
+      <option value="eSewa">eSewa</option>
+      <option value="Khalti">Khalti</option>
+    </select>
+
+    <button class="btn" style="width:100%"
+      onclick="sendOrder()">
+      📲 ORDER VIA WHATSAPP
+    </button>
+  </div>
+</section>
+
+<!-- PAYMENTS -->
+<section class="section" id="payments">
+  <div class="section-head">
+    <h2>💳 Accepted <span>Payments</span></h2>
+    <p>Scan QR to make your payment.</p>
+  </div>
+
+  <div class="payments">
+
+    <div class="payment">
+      <h3 style="color:#20b83a">eSewa</h3>
+      <img src="esewa-qr.jpg"
+        alt="eSewa Payment QR">
+      <p>Scan to Pay with eSewa</p>
+    </div>
+
+    <div class="payment">
+      <h3 style="color:#7045c6">Khalti</h3>
+      <img src="khalti-qr.jpg"
+        alt="Khalti Payment QR">
+      <p>Scan to Pay with Khalti</p>
+    </div>
+
+  </div>
+
+  <p class="note">
+    After payment, send your transaction confirmation
+    to our WhatsApp. Never share your PIN or OTP.
+  </p>
+
+  <div class="order-box">
+    <h3>✅ Payment Completed?</h3>
+    <p>Contact our store for order confirmation.</p>
+
+    <a class="whatsapp"
+      href="https://wa.me/9779761996391"
+      target="_blank">
+      💬 WhatsApp: 9761996391
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <h3 style="color:#ff7900">⚡ NEPAL TOP-UP STORE</h3>
+  <p>Gaming • Gift Cards • Subscriptions</p>
+  <p>WhatsApp: 9761996391</p>
+  <p>© 2026 Nepal Top-Up Store. All Rights Reserved.</p>
+</footer>
+
+<script>
+
+// YOUR WHATSAPP NUMBER
+const phone = "9779761996391";
+
+// FREE FIRE PRICES
+const freeFire = [
+  ["115 Diamonds",115],
+  ["240 Diamonds",250],
+  ["355 Diamonds",370],
+  ["480 Diamonds",440],
+  ["610 Diamonds",550],
+  ["725 Diamonds",660],
+  ["850 Diamonds",770],
+  ["965 Diamonds",880],
+  ["1090 Diamonds",990],
+  ["1240 Diamonds",1100],
+  ["1480 Diamonds",1320],
+  ["1595 Diamonds",1430],
+  ["1720 Diamonds",1540],
+  ["1960 Diamonds",1850],
+  ["2530 Diamonds",2200],
+  ["5060 Diamonds",4400],
+  ["Weekly Membership",220],
+  ["Monthly Membership",1100]
+];
+
+// DISPLAY PRODUCTS
+const grid = document.getElementById("freeFireProducts");
+const packageSelect = document.getElementById("selectedPackage");
+
+freeFire.forEach((item) => {
+
+  const [name,price] = item;
+
+  const card = document.createElement("div");
+  card.className = "product";
+
+  const emoji = name.includes("Membership") ? "👑" : "💎";
+
+  const title = document.createElement("h3");
+  title.textContent = name;
+
+  const icon = document.createElement("div");
+  icon.className = "emoji";
+  icon.textContent = emoji;
+
+  const amount = document.createElement("p");
+  amount.className = "price";
+  amount.textContent = "Rs. " + price;
+
+  const button = document.createElement("button");
+  button.textContent = "Buy Now";
+
+  button.onclick = () => {
+    document.getElementById("selectedGame").value = "Free Fire";
+    packageSelect.value = name;
+    document.getElementById("order").scrollIntoView({
+      behavior:"smooth"
+    });
+  };
+
+  card.append(icon,title,amount,button);
+  grid.appendChild(card);
+
+  const option = document.createElement("option");
+  option.value = name + " - Rs. " + price;
+  option.textContent = name + " - Rs. " + price;
+  packageSelect.appendChild(option);
+
+});
+
+// WHATSAPP ORDER
+function sendOrder() {
+
+  const name = document.getElementById("customerName").value.trim();
+  const uid = document.getElementById("playerUID").value.trim();
+  const game = document.getElementById("selectedGame").value;
+  const pack = document.getElementById("selectedPackage").value;
+  const payment = document.getElementById("paymentMethod").value;
+
+  if(!name || !pack) {
+    alert("Please enter your name and select a package!");
+    return;
+  }
+
+  if(game === "Free Fire" && !uid) {
+    alert("Please enter your Free Fire Player UID!");
+    return;
+  }
+
+  const message =
+    "NEW TOP-UP ORDER\n\n" +
+    "Name: " + name + "\n" +
+    "Game/Service: " + game + "\n" +
+    "Player UID: " + (uid || "Not applicable") + "\n" +
+    "Package: " + pack + "\n" +
+    "Payment Method: " + payment + "\n\n" +
+    "Please confirm my order.";
+
+  const url = "https://wa.me/" + phone +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(url,"_blank");
+}
+
+// OTHER PRODUCT ORDER
+function contactProduct(product) {
+  const message =
+    "Hello NEPAL TOP-UP STORE!\n" +
+    "I want to order: " + product +
+    "\nPlease tell me the price.";
+
+  window.open(
+    "https://wa.me/" + phone +
+    "?text=" + encodeURIComponent(message),
+    "_blank"
+  );
+}
+
+</script>
 </body>
 </html>
