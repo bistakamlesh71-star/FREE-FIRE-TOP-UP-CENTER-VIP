@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gaming Top-Up Hub Nepal</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --accent: #f97316;
+      --text: #f8fafc;
+      --sub: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+    body { background: var(--bg); color: var(--text); padding-bottom: 40px; }
+    header { background: #020617; padding: 18px 20px; text-align: center; border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 10; }
+    header h1 { font-size: 1.4rem; color: var(--accent); letter-spacing: 1px; }
+    .container { max-width: 500px; margin: 20px auto; padding: 0 15px; }
+    .step-box { background: var(--card); border-radius: 12px; padding: 16px; margin-bottom: 18px; border: 1px solid #334155; }
+    .step-title { font-size: 1rem; font-weight: 600; margin-bottom: 12px; color: #38bdf8; }
+    input, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: #fff; font-size: 0.95rem; margin-bottom: 10px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .pack { background: #0f172a; border: 2px solid #334155; border-radius: 10px; padding: 12px; text-align: center; cursor: pointer; transition: 0.2s; }
+    .pack.active { border-color: var(--accent); background: rgba(249, 115, 22, 0.15); }
+    .pack h3 { font-size: 0.95rem; margin-bottom: 4px; }
+    .pack p { font-size: 0.85rem; color: var(--accent); font-weight: bold; }
+    .btn { width: 100%; padding: 14px; background: var(--accent); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
+    .btn:active { transform: scale(0.98); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>⚡ NEPAL TOP-UP STORE</h1>
+  </header>
+
+  <div class="container">
+    <!-- Step 1: Game Selection -->
+    <div class="step-box">
+      <div class="step-title">1. Select Game / Service</div>
+      <select id="gameSelect" onchange="updatePacks()">
+        <option value="Free Fire">Garena Free Fire (UID Top-Up)</option>
+        <option value="Roblox">Roblox (Robux Gift Card)</option>
+        <option value="PUBG">PUBG Mobile (UC)</option>
+      </select>
+      <input type="text" id="playerId" placeholder="Enter Player UID / Username" required>
+    </div>
+
+    <!-- Step 2: Select Package -->
+    <div class="step-box">
+      <div class="step-title">2. Select Package</div>
+      <div class="grid" id="packGrid"></div>
+    </div>
+
+    <!-- Step 3: Payment & Order -->
+    <div class="step-box">
+      <div class="step-title">3. Payment Method</div>
+      <select id="paymentMethod">
+        <option value="eSewa">eSewa Wallet</option>
+        <option value="Khalti">Khalti Wallet</option>
+        <option value="IME Pay">IME Pay</option>
+      </select>
+      <button class="btn" onclick="sendOrder()">Buy Now via WhatsApp</button>
+    </div>
+  </div>
+
+  <script>
+    const packages = {
+      "Free Fire": [
+        { name: "115 Diamonds", price: "Rs. 110" },
+        { name: "240 Diamonds", price: "Rs. 215" },
+        { name: "610 Diamonds", price: "Rs. 530" },
+        { name: "1240 Diamonds", price: "Rs. 1050" },
+        { name: "Weekly Membership", price: "Rs. 210" },
+        { name: "Monthly Membership", price: "Rs. 1020" }
+      ],
+      "Roblox": [
+        { name: "400 Robux", price: "Rs. 750" },
+        { name: "800 Robux", price: "Rs. 1450" },
+        { name: "1700 Robux", price: "Rs. 2900" },
+        { name: "4500 Robux", price: "Rs. 7200" }
+      ],
+      "PUBG": [
+        { name: "60 UC", price: "Rs. 145" },
+        { name: "325 UC", price: "Rs. 710" },
+        { name: "660 UC", price: "Rs. 1400" },
+        { name: "1800 UC", price: "Rs. 3500" }
+      ]
+    };
+
+    let selectedPack = null;
+
+    function updatePacks() {
+      const game = document.getElementById("gameSelect").value;
+      const grid = document.getElementById("packGrid");
+      grid.innerHTML = "";
+      selectedPack = packages[game][0];
+
+      packages[game].forEach((pack, index) => {
+        const div = document.createElement("div");
+        div.className = "pack" + (index === 0 ? " active" : "");
+        div.innerHTML = `<h3>${pack.name}</h3><p>${pack.price}</p>`;
+        div.onclick = () => {
+          document.querySelectorAll(".pack").forEach(el => el.classList.remove("active"));
+          div.classList.add("active");
+          selectedPack = pack;
+        };
+        grid.appendChild(div);
+      });
+    }
+
+    function sendOrder() {
+      const game = document.getElementById("gameSelect").value;
+      const uid = document.getElementById("playerId").value.trim();
+      const payment = document.getElementById("paymentMethod").value;
+
+      if (!uid) {
+        alert("Please enter your Player UID or Username!");
+        return;
+      }
+
+      // Tapai ko WhatsApp number yaha rakhnuhos (977 pachhi ko 10 digit)
+      const phone = "9779800000000"; 
+      const message = `*New Top-Up Order*%0A------------------%0A*Game:* ${game}%0A*Player ID:* ${uid}%0A*Package:* ${selectedPack.name} (${selectedPack.price})%0A*Payment:* ${payment}`;
+      window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+    }
+
+    // Load initial packs
+    updatePacks();
+  </script>
+
+</body>
+</html>
